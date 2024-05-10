@@ -1,0 +1,87 @@
+C:\Users\yaskovdev\AppData\Local\miniconda3\envs\torch\Lib\site-packages\torch\autograd\__init__.py:251: UserWarning: Error detected in MulBackward0. Traceback of forward call that caused the error:
+  File "C:\dev\git_home\stack-exchange-questions-and-answers\train-rnn-with-autograd\main.py", line 40, in <module>
+    predictions = model(inputs)
+  File "C:\Users\yaskovdev\AppData\Local\miniconda3\envs\torch\Lib\site-packages\keras_core\src\utils\traceback_utils.py", line 118, in error_handler
+    return fn(*args, **kwargs)
+  File "C:\Users\yaskovdev\AppData\Local\miniconda3\envs\torch\Lib\site-packages\keras_core\src\layers\layer.py", line 810, in __call__
+    outputs = super().__call__(*args, **kwargs)
+  File "C:\Users\yaskovdev\AppData\Local\miniconda3\envs\torch\Lib\site-packages\torch\nn\modules\module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "C:\Users\yaskovdev\AppData\Local\miniconda3\envs\torch\Lib\site-packages\torch\nn\modules\module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "C:\Users\yaskovdev\AppData\Local\miniconda3\envs\torch\Lib\site-packages\keras_core\src\backend\torch\layer.py", line 26, in forward
+    return Operation.__call__(self, *args, **kwargs)
+  File "C:\Users\yaskovdev\AppData\Local\miniconda3\envs\torch\Lib\site-packages\keras_core\src\utils\traceback_utils.py", line 118, in error_handler
+    return fn(*args, **kwargs)
+  File "C:\Users\yaskovdev\AppData\Local\miniconda3\envs\torch\Lib\site-packages\keras_core\src\ops\operation.py", line 42, in __call__
+    return call_fn(*args, **kwargs)
+  File "C:\Users\yaskovdev\AppData\Local\miniconda3\envs\torch\Lib\site-packages\keras_core\src\utils\traceback_utils.py", line 157, in error_handler
+    return fn(*args, **kwargs)
+  File "C:\Users\yaskovdev\AppData\Local\miniconda3\envs\torch\Lib\site-packages\keras_core\src\models\sequential.py", line 187, in call
+    return self._functional.call(inputs, training=training, mask=mask)
+  File "C:\Users\yaskovdev\AppData\Local\miniconda3\envs\torch\Lib\site-packages\keras_core\src\models\functional.py", line 188, in call
+    outputs = self._run_through_graph(
+  File "C:\Users\yaskovdev\AppData\Local\miniconda3\envs\torch\Lib\site-packages\keras_core\src\ops\function.py", line 140, in _run_through_graph
+    outputs = operation_fn(node.operation)(*args, **kwargs)
+  File "C:\Users\yaskovdev\AppData\Local\miniconda3\envs\torch\Lib\site-packages\keras_core\src\models\functional.py", line 574, in call
+    return operation(*args, **kwargs)
+  File "C:\Users\yaskovdev\AppData\Local\miniconda3\envs\torch\Lib\site-packages\keras_core\src\utils\traceback_utils.py", line 118, in error_handler
+    return fn(*args, **kwargs)
+  File "C:\Users\yaskovdev\AppData\Local\miniconda3\envs\torch\Lib\site-packages\keras_core\src\layers\layer.py", line 810, in __call__
+    outputs = super().__call__(*args, **kwargs)
+  File "C:\Users\yaskovdev\AppData\Local\miniconda3\envs\torch\Lib\site-packages\torch\nn\modules\module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "C:\Users\yaskovdev\AppData\Local\miniconda3\envs\torch\Lib\site-packages\torch\nn\modules\module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "C:\Users\yaskovdev\AppData\Local\miniconda3\envs\torch\Lib\site-packages\keras_core\src\backend\torch\layer.py", line 26, in forward
+    return Operation.__call__(self, *args, **kwargs)
+  File "C:\Users\yaskovdev\AppData\Local\miniconda3\envs\torch\Lib\site-packages\keras_core\src\utils\traceback_utils.py", line 118, in error_handler
+    return fn(*args, **kwargs)
+  File "C:\Users\yaskovdev\AppData\Local\miniconda3\envs\torch\Lib\site-packages\keras_core\src\ops\operation.py", line 42, in __call__
+    return call_fn(*args, **kwargs)
+  File "C:\Users\yaskovdev\AppData\Local\miniconda3\envs\torch\Lib\site-packages\keras_core\src\utils\traceback_utils.py", line 157, in error_handler
+    return fn(*args, **kwargs)
+  File "C:\Users\yaskovdev\AppData\Local\miniconda3\envs\torch\Lib\site-packages\keras_core\src\layers\rnn\lstm.py", line 538, in call
+    return super().call(
+  File "C:\Users\yaskovdev\AppData\Local\miniconda3\envs\torch\Lib\site-packages\keras_core\src\layers\rnn\rnn.py", line 397, in call
+    last_output, outputs, states = self.inner_loop(
+  File "C:\Users\yaskovdev\AppData\Local\miniconda3\envs\torch\Lib\site-packages\keras_core\src\layers\rnn\lstm.py", line 533, in inner_loop
+    return super().inner_loop(
+  File "C:\Users\yaskovdev\AppData\Local\miniconda3\envs\torch\Lib\site-packages\keras_core\src\layers\rnn\rnn.py", line 339, in inner_loop
+    return backend.rnn(
+  File "C:\Users\yaskovdev\AppData\Local\miniconda3\envs\torch\Lib\site-packages\keras_core\src\backend\torch\rnn.py", line 344, in rnn
+    final_outputs = _step(time, output_ta_t, *new_states)
+  File "C:\Users\yaskovdev\AppData\Local\miniconda3\envs\torch\Lib\site-packages\keras_core\src\backend\torch\rnn.py", line 327, in _step
+    output, new_states = step_function(
+  File "C:\Users\yaskovdev\AppData\Local\miniconda3\envs\torch\Lib\site-packages\keras_core\src\layers\rnn\rnn.py", line 331, in step
+    output, new_states = self.cell(inputs, states, **cell_kwargs)
+  File "C:\Users\yaskovdev\AppData\Local\miniconda3\envs\torch\Lib\site-packages\keras_core\src\utils\traceback_utils.py", line 118, in error_handler
+    return fn(*args, **kwargs)
+  File "C:\Users\yaskovdev\AppData\Local\miniconda3\envs\torch\Lib\site-packages\keras_core\src\layers\layer.py", line 810, in __call__
+    outputs = super().__call__(*args, **kwargs)
+  File "C:\Users\yaskovdev\AppData\Local\miniconda3\envs\torch\Lib\site-packages\torch\nn\modules\module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "C:\Users\yaskovdev\AppData\Local\miniconda3\envs\torch\Lib\site-packages\torch\nn\modules\module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "C:\Users\yaskovdev\AppData\Local\miniconda3\envs\torch\Lib\site-packages\keras_core\src\backend\torch\layer.py", line 26, in forward
+    return Operation.__call__(self, *args, **kwargs)
+  File "C:\Users\yaskovdev\AppData\Local\miniconda3\envs\torch\Lib\site-packages\keras_core\src\utils\traceback_utils.py", line 118, in error_handler
+    return fn(*args, **kwargs)
+  File "C:\Users\yaskovdev\AppData\Local\miniconda3\envs\torch\Lib\site-packages\keras_core\src\ops\operation.py", line 42, in __call__
+    return call_fn(*args, **kwargs)
+  File "C:\Users\yaskovdev\AppData\Local\miniconda3\envs\torch\Lib\site-packages\keras_core\src\utils\traceback_utils.py", line 157, in error_handler
+    return fn(*args, **kwargs)
+  File "C:\Users\yaskovdev\AppData\Local\miniconda3\envs\torch\Lib\site-packages\keras_core\src\layers\rnn\lstm.py", line 272, in call
+    c, o = self._compute_carry_and_output_fused(z, c_tm1)
+  File "C:\Users\yaskovdev\AppData\Local\miniconda3\envs\torch\Lib\site-packages\keras_core\src\layers\rnn\lstm.py", line 224, in _compute_carry_and_output_fused
+    c = f * c_tm1 + i * self.activation(z2)
+ (Triggered internally at C:\cb\pytorch_1000000000000\work\torch\csrc\autograd\python_anomaly_mode.cpp:119.)
+  Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+Traceback (most recent call last):
+  File "C:\dev\git_home\stack-exchange-questions-and-answers\train-rnn-with-autograd\main.py", line 43, in <module>
+    loss.backward()
+  File "C:\Users\yaskovdev\AppData\Local\miniconda3\envs\torch\Lib\site-packages\torch\_tensor.py", line 492, in backward
+    torch.autograd.backward(
+  File "C:\Users\yaskovdev\AppData\Local\miniconda3\envs\torch\Lib\site-packages\torch\autograd\__init__.py", line 251, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+RuntimeError: one of the variables needed for gradient computation has been modified by an inplace operation: [torch.FloatTensor [64, 1024]] is at version 1; expected version 0 instead. Hint: the backtrace further above shows the operation that failed to compute its gradient. The variable in question was changed in there or anywhere later. Good luck!
