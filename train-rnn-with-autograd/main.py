@@ -26,7 +26,7 @@ if __name__ == '__main__':
     model = keras.Sequential([
         keras.layers.Input(shape=(SEQ_LENGTH,), batch_size=BATCH_SIZE),
         keras.layers.Embedding(len(vocabulary), 256),
-        keras.layers.LSTM(1024, return_sequences=True, stateful=False),
+        keras.layers.LSTM(1024, return_sequences=True, stateful=True),
         keras.layers.Dense(len(vocabulary))
     ])
     model.summary()
