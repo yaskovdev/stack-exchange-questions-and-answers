@@ -54,7 +54,7 @@ if __name__ == '__main__':
 
     loss_function = torch.nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=5e-3)
-    for i in range(500):
+    for i in range(1000):
         inputs, targets = random_inputs_and_targets(vectorized_songs, seq_length=SEQ_LENGTH, batch_size=BATCH_SIZE)
 
         predictions = model(inputs)
