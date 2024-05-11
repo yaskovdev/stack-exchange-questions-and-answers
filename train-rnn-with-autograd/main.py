@@ -3,6 +3,7 @@ import os
 import keras_core as keras
 import numpy as np
 import torch
+from torch.nn.functional import softmax
 
 SEQ_LENGTH = 100
 BATCH_SIZE = 64
@@ -15,34 +16,61 @@ def random_inputs_and_targets(songs, seq_length, batch_size):
     return x_batch, y_batch
 
 
+def generate_songs(model, char_to_index, index_to_char, start_string, generation_length=1000):
+    input_eval = [char_to_index[s] for s in start_string]
+    input_eval = torch.unsqueeze(torch.tensor(input_eval), 0)
+
+    text_generated = []
+
+    for i in range(generation_length):
+        predictions = torch.squeeze(model(input_eval), 0)
+        predicted_index = torch.multinomial(softmax(predictions, dim=0), 1, replacement=True)[-1, 0]
+        input_eval = torch.unsqueeze(torch.unsqueeze(predicted_index, 0), 0)
+        text_generated.append(index_to_char[predicted_index.item()])
+
+    return start_string + ''.join(text_generated)
+
+
+def build_model(batch_size):
+    return keras.Sequential([
+        keras.layers.Input(shape=(SEQ_LENGTH,), batch_size=batch_size),
+        keras.layers.Embedding(len(vocabulary), 256),
+        keras.layers.LSTM(1024, return_sequences=True, stateful=False),
+        keras.layers.Dense(len(vocabulary))
+    ])
+
+
 if __name__ == '__main__':
-    with open(os.path.join(os.path.dirname(__file__), "songs.txt"), "r") as f:
+    cwd = os.path.dirname(__file__)
+    with open(os.path.join(cwd, "songs.txt"), "r") as f:
         songs = f.read()
 
     vocabulary = sorted(set(songs))
     index_to_char, char_to_index = np.array(vocabulary), {u: i for i, u in enumerate(vocabulary)}
     vectorized_songs = np.array([char_to_index[character] for character in songs])
 
-    model = keras.Sequential([
-        keras.layers.Input(shape=(SEQ_LENGTH,), batch_size=BATCH_SIZE),
-        keras.layers.Embedding(len(vocabulary), 256),
-        keras.layers.LSTM(1024, return_sequences=True, stateful=True),
-        keras.layers.Dense(len(vocabulary))
-    ])
+    model = build_model(BATCH_SIZE)
     model.summary()
 
-    torch.autograd.set_detect_anomaly(True)
-    loss_fn = torch.nn.CrossEntropyLoss()
+    loss_function = torch.nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=5e-3)
     for i in range(500):
         inputs, targets = random_inputs_and_targets(vectorized_songs, seq_length=SEQ_LENGTH, batch_size=BATCH_SIZE)
 
         predictions = model(inputs)
-        loss = loss_fn(predictions.permute((0, 2, 1)), torch.from_numpy(targets).long())
+        loss = loss_function(predictions.permute((0, 2, 1)), torch.from_numpy(targets).long().cuda())
 
         loss.backward()
         optimizer.step()
         optimizer.zero_grad()
-        print("Loss at iteration", i, "is", loss.item())
+        if i % 10 == 0:
+            print("Loss at iteration", i, "is", loss.item())
 
-    print("The model has been trained")
+    torch.save(model.state_dict(), os.path.join(cwd, "model.pt"))
+    print("The model has been saved")
+
+    trained_model = build_model(1)
+    trained_model.load_state_dict(torch.load(os.path.join(cwd, "model.pt")))
+    trained_model.eval()
+
+    print("Generated songs:", generate_songs(trained_model, char_to_index, index_to_char, start_string="X"))
