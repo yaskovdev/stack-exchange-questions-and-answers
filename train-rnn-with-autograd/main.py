@@ -6,7 +6,7 @@ import torch
 from torch.nn.functional import softmax
 
 SEQ_LENGTH = 100
-BATCH_SIZE = 64
+BATCH_SIZE = 512
 
 
 def random_inputs_and_targets(songs, seq_length, batch_size):
@@ -31,11 +31,11 @@ def generate_songs(model, char_to_index, index_to_char, start_string, generation
     return start_string + ''.join(text_generated)
 
 
-def build_model(batch_size):
+def build_model(batch_size, stateful):
     return keras.Sequential([
         keras.layers.Input(shape=(SEQ_LENGTH,), batch_size=batch_size),
         keras.layers.Embedding(len(vocabulary), 256),
-        keras.layers.LSTM(1024, return_sequences=True, stateful=False),
+        keras.layers.LSTM(1024, return_sequences=True, stateful=stateful),
         keras.layers.Dense(len(vocabulary))
     ])
 
@@ -49,7 +49,7 @@ if __name__ == '__main__':
     index_to_char, char_to_index = np.array(vocabulary), {u: i for i, u in enumerate(vocabulary)}
     vectorized_songs = np.array([char_to_index[character] for character in songs])
 
-    model = build_model(BATCH_SIZE)
+    model = build_model(BATCH_SIZE, False)
     model.summary()
 
     loss_function = torch.nn.CrossEntropyLoss()
@@ -69,7 +69,7 @@ if __name__ == '__main__':
     torch.save(model.state_dict(), os.path.join(cwd, "model.pt"))
     print("The model has been saved")
 
-    trained_model = build_model(1)
+    trained_model = build_model(1, True)
     trained_model.load_state_dict(torch.load(os.path.join(cwd, "model.pt")))
     trained_model.eval()
 
