@@ -36,7 +36,7 @@ def build_model(batch_size, stateful):
         keras.layers.Input(shape=(SEQ_LENGTH,), batch_size=batch_size),
         keras.layers.Embedding(len(vocabulary), 256),
         keras.layers.LSTM(1024, return_sequences=True, stateful=stateful),
-        keras.layers.Dense(len(vocabulary))
+        keras.layers.Dense(len(vocabulary), activation=None)  # It is None by default, but other options like "log_softmax" are possible
     ])
 
 
@@ -73,4 +73,4 @@ if __name__ == '__main__':
     trained_model.load_state_dict(torch.load(os.path.join(cwd, "model.pt")))
     trained_model.eval()
 
-    print("Generated songs:", generate_songs(trained_model, char_to_index, index_to_char, start_string="X"))
+    print("Generated songs:", generate_songs(trained_model, char_to_index, index_to_char, start_string="X", generation_length=4000))
