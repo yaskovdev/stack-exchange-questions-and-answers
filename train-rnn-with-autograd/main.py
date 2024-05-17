@@ -73,4 +73,4 @@ if __name__ == '__main__':
     trained_model.load_state_dict(torch.load(os.path.join(cwd, "model.pt")))
     trained_model.eval()
 
-    print("Generated songs:", generate_songs(trained_model, char_to_index, index_to_char, start_string="X", generation_length=4000))
+    print("Generated songs:", generate_songs(trained_model, char_to_index, index_to_char, start_string="X"))
