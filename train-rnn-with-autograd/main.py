@@ -24,7 +24,7 @@ def generate_songs(model, char_to_index, index_to_char, start_string, generation
     for i in range(generation_length):
         predictions = torch.squeeze(model(input_eval), 0)
         # The problem was here: it was "torch.nn.functional.softmax(predictions, dim=0)" but should be "predictions.exp()"
-        predicted_index = torch.multinomial(torch.nn.functional.softmax(predictions, dim=0), 1, replacement=True)[-1, 0]
+        predicted_index = torch.multinomial(predictions.exp(), 1, replacement=True)[-1, 0]
         input_eval = torch.unsqueeze(torch.unsqueeze(predicted_index, 0), 0)
         text_generated.append(index_to_char[predicted_index.item()])
 
