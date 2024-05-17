@@ -36,7 +36,7 @@ def build_model(batch_size, stateful):
         keras.layers.Input(shape=(SEQ_LENGTH,), batch_size=batch_size),
         keras.layers.Embedding(len(vocabulary), 256),
         keras.layers.LSTM(1024, return_sequences=True, stateful=stateful),
-        keras.layers.Dense(len(vocabulary), activation=None)  # It is None by default, but other options like "log_softmax" are possible
+        keras.layers.Dense(len(vocabulary), activation=None)  # activation is None by default, but other options like "log_softmax" are possible
     ])
 
 
