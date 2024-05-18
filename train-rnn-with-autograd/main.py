@@ -58,7 +58,7 @@ if __name__ == '__main__':
         inputs, targets = random_inputs_and_targets(vectorized_songs, seq_length=SEQ_LENGTH, batch_size=BATCH_SIZE)
 
         predictions = model(inputs)
-        loss = loss_function(predictions.permute((0, 2, 1)), torch.from_numpy(targets).long().cuda())
+        loss = loss_function(predictions.permute(0, 2, 1), torch.from_numpy(targets).long().cuda())
 
         loss.backward()
         optimizer.step()
