@@ -28,7 +28,7 @@ def generate_songs(model, char_to_index, index_to_char, start_string, generation
         input_eval = torch.unsqueeze(torch.unsqueeze(predicted_index, 0), 0)
         text_generated.append(index_to_char[predicted_index.item()])
 
-    return start_string + ''.join(text_generated)
+    return start_string + "".join(text_generated)
 
 
 def build_model(batch_size, stateful):
@@ -40,7 +40,7 @@ def build_model(batch_size, stateful):
     ])
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     cwd = os.path.dirname(__file__)
     with open(os.path.join(cwd, "songs.txt"), "r") as f:
         songs = f.read()
