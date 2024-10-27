@@ -8,12 +8,12 @@ public class DataProcessingService(ILogger<DataProcessingService> logger) : IDat
 
     public void StartProcessing(int socketId)
     {
-        _sessions[socketId] = new Session(socketId, new DataProcessor(logger));
+        _sessions.GetOrAdd(socketId, new Session(socketId, new DataProcessor(logger)));
     }
 
     public void StopProcessing(int socketId)
     {
-        if (_sessions.TryGetValue(socketId, out var session))
+        if (_sessions.TryRemove(socketId, out var session))
         {
             session.Dispose();
         }
