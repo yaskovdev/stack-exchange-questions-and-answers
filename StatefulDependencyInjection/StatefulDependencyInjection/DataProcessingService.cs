@@ -13,12 +13,11 @@ public class DataProcessingService(ILogger<DataProcessingService> logger) : IDat
 
     private DataProcessor CreateDataProcessor()
     {
-        // What if the Decoder and Encoder have dependencies themselves?
+        // What if the DataProcessor has dependencies itself?
         // What if the dependencies in turn need their own dependencies?
         // What if one of the leaves of this potentially big dependency tree needs a dependency from the dependency
         // container, say, the logger? Then the logger becomes a pass-through dependency.
-        return new DataProcessor(
-            logger /*, new Decoder(new DecoderDependency(new StatisticsCollector(), logger)), new Encoder()*/);
+        return new DataProcessor(logger);
     }
 
     public void StopProcessing(int socketId)
