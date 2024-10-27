@@ -19,12 +19,12 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapPost("/sockets/{socketId}/subscribe",
+app.MapPost("/sockets/{socketId:int}/subscribe",
         (int socketId, IDataProcessingService service) => service.StartProcessing(socketId))
     .WithName("SubscribeToSocketWithId")
     .WithOpenApi();
 
-app.MapPost("/sockets/{socketId}/unsubscribe",
+app.MapPost("/sockets/{socketId:int}/unsubscribe",
         (int socketId, IDataProcessingService service) => service.StopProcessing(socketId))
     .WithName("UnsubscribeFromSocketWithId")
     .WithOpenApi();
