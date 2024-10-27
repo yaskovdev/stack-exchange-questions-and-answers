@@ -1,16 +1,12 @@
 namespace StatefulDependencyInjection;
 
-public class Session : IDisposable
+public class Session(int socketId, DataProcessor dataProcessor) : IDisposable
 {
-    private readonly Socket _socket;
-
-    public Session(int socketId, DataProcessor dataProcessor)
-    {
-        _socket = new Socket(socketId, dataProcessor.ProcessData);
-    }
+    private readonly Socket _socket = new(socketId, dataProcessor.ProcessData);
 
     public void Dispose()
     {
         _socket.Dispose();
+        GC.SuppressFinalize(this);
     }
 }
