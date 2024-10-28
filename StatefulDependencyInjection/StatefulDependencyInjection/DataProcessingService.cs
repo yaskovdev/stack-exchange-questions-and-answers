@@ -8,7 +8,7 @@ public class DataProcessingService(ILogger<DataProcessingService> logger) : IDat
 
     public void StartProcessing(int socketId)
     {
-        _sessions.GetOrAdd(socketId, new Session(socketId, CreateDataProcessor()));
+        _sessions.GetOrAdd(socketId, _ => new Session(socketId, CreateDataProcessor()));
     }
 
     private DataProcessor CreateDataProcessor()

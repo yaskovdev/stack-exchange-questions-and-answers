@@ -1,6 +1,6 @@
 namespace StatefulDependencyInjection;
 
-public class DataProcessor(ILogger<DataProcessingService> logger)
+public class DataProcessor(ILogger<DataProcessingService> logger) : IDataProcessor
 {
     public void ProcessData(int socketId, byte[] data)
     {

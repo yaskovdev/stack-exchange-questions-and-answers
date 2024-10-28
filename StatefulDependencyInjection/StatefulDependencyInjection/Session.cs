@@ -2,7 +2,7 @@ namespace StatefulDependencyInjection;
 
 public class Session(int socketId, DataProcessor dataProcessor) : IDisposable
 {
-    private readonly Socket _socket = new(socketId, dataProcessor.ProcessData);
+    private readonly Socket _socket = new(socketId, dataProcessor);
 
     public void Dispose()
     {
