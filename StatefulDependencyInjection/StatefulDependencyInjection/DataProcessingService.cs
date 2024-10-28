@@ -13,7 +13,7 @@ public class DataProcessingService(ILogger<DataProcessingService> logger) : IDat
 
     private SocketHandler CreateSocketHandler(int socketId)
     {
-        // I have to manually create all the SocketHandler dependencies here.
+        // I have to either manually create or fetch from the container all the SocketHandler dependencies here.
         return new SocketHandler(socketId, logger);
     }
 
