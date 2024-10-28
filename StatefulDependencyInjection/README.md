@@ -2,7 +2,7 @@
 
 How to use dependency injection for a tree of stateful objects?
 
-I have a Web application that I will be using to illustrate the issue. The application can handle two requests:
+I have a Web application that I will be using to illustrate the issue. The application can only handle two requests:
 
 1. `POST /sockets/{id}/subscribe`, which subscribes to a socket with a given ID and logs the data it receives.
 2. `POST /sockets/{id}/unsubscribe`, which unsubscribes from a socket with a given ID.
