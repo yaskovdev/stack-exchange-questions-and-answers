@@ -6,14 +6,14 @@ public class Socket : IDisposable
 {
     private readonly Timer _timer;
 
-    public Socket(int id, IDataProcessor dataProcessor)
+    public Socket(int id, Action<int, byte[]> processData)
     {
         _timer = new Timer(TimeSpan.FromSeconds(1));
         _timer.Elapsed += (_, _) =>
         {
             var data = new byte[1024];
             Random.Shared.NextBytes(data);
-            dataProcessor.ProcessData(id, data);
+            processData(id, data);
         };
         _timer.Start();
     }
