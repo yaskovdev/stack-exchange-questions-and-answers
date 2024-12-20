@@ -86,6 +86,12 @@ THE POSSIBILITY OF SUCH DAMAGE.
                     <compilerVersion>${javac.target}</compilerVersion>
                     <source>${javac.target}</source>
                     <target>${javac.target}</target>
+                    <compilerArgs>
+                        <!-- This argument is required because JDK 23+ changes the default annotation processing policy.
+                         As a result, org.openjdk.jcstress.infra.processors.JCStressTestProcessor is not triggered,
+                         and META-INF/TestList is not created. -->
+                        <arg>-proc:full</arg>
+                    </compilerArgs>
                 </configuration>
             </plugin>
 
