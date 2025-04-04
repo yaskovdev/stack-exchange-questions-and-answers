@@ -23,7 +23,7 @@ internal static class Program
 
         for (var i = 0; i < 1000; i++)
         {
-            var payload = new byte[] { 0, 1, 2, 3, 4, 5, 6, 7 };
+            byte[] payload = [0, 1, 2, 3, 4, 5, 6, 7];
             Console.WriteLine($"Appending {payload.Length} bytes to blob");
             await stream.WriteAsync(payload, CancellationToken.None); // throws RequestFailedException once SetMetadataAsync is called
             Console.WriteLine("Setting metadata for blob");
