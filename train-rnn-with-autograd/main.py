@@ -23,8 +23,11 @@ def generate_songs(model, char_to_index, index_to_char, start_string, generation
 
     for i in range(generation_length):
         predictions = torch.squeeze(model(input_eval), 0)
-        # The problem was here: it was "torch.nn.functional.softmax(predictions, dim=0)" but should be "predictions.exp()"
-        predicted_index = torch.multinomial(predictions.exp(), 1, replacement=True)[-1, 0]
+        # The problem was here: it was "torch.nn.functional.softmax(predictions, dim=0)".
+        # It worked when I changed it to "predictions.exp()". I thought it was because the model output was log softmax, so exp of the output is the softmax.
+        # However, the model output is simply logits, so using "torch.nn.functional.softmax" was correct, but the "dim" was incorrect, it should be -1, not 0.
+        # If the dim is 0, then the predictions turn into all ones, which if of course wrong.
+        predicted_index = torch.multinomial(torch.nn.functional.softmax(predictions, dim=-1), 1, replacement=True)[-1, 0]
         input_eval = torch.unsqueeze(torch.unsqueeze(predicted_index, 0), 0)
         text_generated.append(index_to_char[predicted_index.item()])
 
